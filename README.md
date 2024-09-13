@@ -1,17 +1,6 @@
-# Startcode for JPA projects
+# Activity Logger Exercise
 
-## How to use the EntityManagerFactory through HibernateConfig
+This is a rough solution to the exercise part 1: 
 
-It can run in two modes: normal and test. Normal is default and test is 
-activated by setting a parameter HibernateConfig.TEST when creating the
-EntityManagerFactory by calling the .
+- [https://dat3cph.github.io/material/deepdive-2/exercises/activity-logger-part-1/](https://dat3cph.github.io/material/deepdive-2/exercises/activity-logger-part-1/)
 
-```java
-EntityManagerFactory emf = HibernateConfig.getEntityManagerFactoryConfig(state, dbName);
-``` 
-
-The state is either HibernateConfig.NORMAL or HibernateConfig.TEST and dbName is 
-the name of the database.
-
-If the state is HibernateConfig.TEST, then a test container is started and
-the database is dropped and created.
