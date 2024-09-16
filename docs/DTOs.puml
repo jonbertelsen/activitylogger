@@ -1,0 +1,40 @@
+
+@startuml
+
+class ActivityDTO {
+    - Long id
+    - LocalDate exerciseDate
+    - ActivityType exerciseType
+    - LocalTime timeOfDay
+    - double duration
+    - double distance
+    - String comment
+    - CityInfoDTO cityInfo
+    - WeatherInfoDTO weatherInfo
+}
+
+class CityInfoDTO {
+    - String id
+    - String name
+    - String href
+    - Double[] visualCenter
+}
+
+class CurrentDataDTO {
+    - double temperature
+    - String skyText
+    - int humidity
+    - String windText
+}
+
+class WeatherInfoDTO {
+    - Long id
+    - String locationName
+    - CurrentDataDTO currentData
+}
+
+ActivityDTO --> CityInfoDTO
+ActivityDTO --> WeatherInfoDTO
+WeatherInfoDTO --> CurrentDataDTO
+
+@enduml

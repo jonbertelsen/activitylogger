@@ -14,18 +14,20 @@ public class CurrentData {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
+
     private double temperature;
     private String skyText;
     private int humidity;
     private String windText;
+
     @OneToOne(mappedBy = "currentData")
     @ToString.Exclude
     private WeatherInfo weatherInfo;
 
-    public CurrentData(CurrentDataDTO currentData) {
-        this.temperature = currentData.getTemperature();
-        this.skyText = currentData.getSkyText();
-        this.humidity = currentData.getHumidity();
-        this.windText = currentData.getWindText();
+    public CurrentData(CurrentDataDTO currentDataDTO) {
+        this.temperature = currentDataDTO.getTemperature();
+        this.skyText = currentDataDTO.getSkyText();
+        this.humidity = currentDataDTO.getHumidity();
+        this.windText = currentDataDTO.getWindText();
     }
 }

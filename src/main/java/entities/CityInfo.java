@@ -1,13 +1,10 @@
 package entities;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import dtos.CityInfoDTO;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.ToString;
 
 import java.util.List;
 
@@ -27,11 +24,11 @@ public class CityInfo {
     @OneToMany(mappedBy = "cityInfo")
     private List<Activity> activities;
 
-    public CityInfo(CityInfoDTO cityInfo) {
-        this.id = cityInfo.getId();
-        this.cityName = cityInfo.getName();
-        this.href = cityInfo.getHref();
-        this.visualCenterX = cityInfo.getVisualCenter()[0];
-        this.visualCenterY = cityInfo.getVisualCenter()[1];
+    public CityInfo(CityInfoDTO cityInfoDTO) {
+        this.id = cityInfoDTO.getId();
+        this.cityName = cityInfoDTO.getName();
+        this.href = cityInfoDTO.getHref();
+        this.visualCenterX = cityInfoDTO.getVisualCenter()[0];
+        this.visualCenterY = cityInfoDTO.getVisualCenter()[1];
     }
 }

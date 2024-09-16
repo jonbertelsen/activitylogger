@@ -1,0 +1,44 @@
+
+@startuml
+
+class Activity {
+    - Long id
+    - LocalDate exerciseDate
+    - ActivityType exerciseType
+    - LocalTime timeOfDay
+    - double duration
+    - double distance
+    - String comment
+    - WeatherInfo weatherInfo
+    - CityInfo cityInfo
+}
+
+class CityInfo {
+    - String id
+    - String cityName
+    - String href
+    - double visualCenterX
+    - double visualCenterY
+    - List<Activity> activities
+}
+
+class CurrentData {
+    - Long id
+    - double temperature
+    - String skyText
+    - int humidity
+    - String windText
+}
+
+class WeatherInfo {
+    - Long id
+    - String locationName
+    - CurrentData currentData
+    - Activity activity
+}
+
+Activity --> WeatherInfo
+Activity --> CityInfo
+WeatherInfo --> CurrentData
+
+@enduml

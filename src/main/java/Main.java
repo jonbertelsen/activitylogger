@@ -19,6 +19,8 @@ public class Main {
 
         EntityManagerFactory emf = HibernateConfig.getEntityManagerFactory("activitylogger");
 
+        // Fetch data from external APIs
+
         WeatherInfoDTO weatherInfo = WeatherService.fetchWeatherDataByLocationName("Roskilde");
         CityInfoDTO cityInfo = CityService.getCityInfo("Roskilde");
 
@@ -38,11 +40,14 @@ public class Main {
         ActivityDAO activityDAO = ActivityDAO.getInstance(emf);
         activityDTO = activityDAO.createActivity(activityDTO);
 
+        // Map aggregated data back to JSON
+
         ObjectMapper objectMapper = new ObjectMapper();
+
+        // Serialize LocalDateTime to JSON
         objectMapper.registerModule(new JavaTimeModule());
         objectMapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
 
-        // Serialize LocalDateTime to JSON
         String json = objectMapper.writeValueAsString(activityDTO);
         System.out.println(json);
     }
