@@ -42,14 +42,20 @@ public class Main {
         ActivityDAO activityDAO = ActivityDAO.getInstance(emf);
         activityDTO = activityDAO.createActivity(activityDTO);
 
-        // Map aggregated data back to JSON
-        ObjectMapper objectMapper = new ObjectMapper();
+        System.out.println(convertObjectToJson(activityDTO));
 
-        // Serialize LocalDateTime to JSON
-        objectMapper.registerModule(new JavaTimeModule());
-        objectMapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
+        // Update activity
+        activityDTO.setComment("Lovely downhill stroll in the rain");
+        activityDTO.getWeatherInfo().getCurrentData().setTemperature(5.0);
+        activityDTO.getCityInfo().setHref("https://en.wikipedia.org/wiki/Roskilde");
+        activityDTO = activityDAO.updateActivity(activityDTO);
+        System.out.println(convertObjectToJson(activityDTO));
+    }
 
-        String json = objectMapper.writeValueAsString(activityDTO);
-        System.out.println(json);
+    public static String convertObjectToJson(Object object) throws IOException {
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.registerModule(new JavaTimeModule());
+        mapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
+        return mapper.writeValueAsString(object);
     }
 }

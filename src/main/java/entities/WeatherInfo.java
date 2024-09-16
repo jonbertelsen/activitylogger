@@ -16,7 +16,7 @@ public class WeatherInfo {
     private Long id;
 
     private String locationName;
-    @OneToOne(cascade = CascadeType.PERSIST)
+    @OneToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
     private CurrentData currentData;
 
     @ToString.Exclude
