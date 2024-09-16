@@ -1,10 +1,8 @@
 package daos;
 
 import dtos.ActivityDTO;
-import dtos.WeatherInfoDTO;
 import entities.Activity;
 import entities.CityInfo;
-import entities.CurrentData;
 import entities.WeatherInfo;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;

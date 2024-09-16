@@ -8,7 +8,9 @@ import dtos.WeatherInfoDTO;
 import enums.ActivityType;
 import jakarta.persistence.EntityManagerFactory;
 import config.HibernateConfig;
+import services.ActivityService;
 import services.CityService;
+import services.JsonService;
 import services.WeatherService;
 import java.io.IOException;
 import java.time.LocalDate;
@@ -20,42 +22,25 @@ public class Main {
         EntityManagerFactory emf = HibernateConfig.getEntityManagerFactory("activitylogger");
 
         // Fetch data from external APIs
+        ActivityDTO activityDTO = ActivityService.createActivity(emf, "Roskilde", 5.5, 35.0, LocalTime.of(12, 30),
+                LocalDate.now(), "Nice walk in the park", ActivityType.WALKING);
 
-        WeatherInfoDTO weatherInfo = WeatherService.fetchWeatherDataByLocationName("Roskilde");
-        CityInfoDTO cityInfo = CityService.getCityInfo("Roskilde");
-
-        // Normally you would get this data from a form on a website or similar
-        ActivityDTO activityDTO = ActivityDTO
-                .builder()
-                .exerciseType(ActivityType.RUNNING)
-                .cityInfo(cityInfo)
-                .distance(6.5)
-                .exerciseDate(LocalDate.now())
-                .duration(30.0)
-                .timeOfDay(LocalTime.of(15, 45))
-                .comment("Lovely downhill stroll")
-                .cityInfo(cityInfo)
-                .weatherInfo(weatherInfo)
-                .build();
-
-        // Persist data to database
-        ActivityDAO activityDAO = ActivityDAO.getInstance(emf);
-        activityDTO = activityDAO.createActivity(activityDTO);
-
-        System.out.println(convertObjectToJson(activityDTO));
+        System.out.println("Activity persisted to database:");
+        System.out.println(JsonService.convertObjectToJson(activityDTO));
 
         // Update activity
-        activityDTO.setComment("Lovely downhill stroll in the rain");
-        activityDTO.getWeatherInfo().getCurrentData().setTemperature(5.0);
-        activityDTO.getCityInfo().setHref("https://en.wikipedia.org/wiki/Roskilde");
-        activityDTO = activityDAO.updateActivity(activityDTO);
-        System.out.println(convertObjectToJson(activityDTO));
+        String json = "{\"id\":1,\"exerciseDate\":\"2024-09-20\",\"exerciseType\":\"RUNNING\",\"timeOfDay\":\"12:30\",\"duration\":46.0,\"distance\":7.5,\"comment\":\"Lovely downhill stroll in the rain\",\"cityInfo\":{\"id\":\"12337669-dbab-6b98-e053-d480220a5a3f\",\"primærtnavn\":\"Roskilde By\",\"href\":\"https://en.wikipedia.org/wiki/Roskilde\",\"visueltcenter\":[57.6415,11.0805]},\"weatherInfo\":{\"id\":1,\"LocationName\":\"Roskilde\",\"CurrentData\":{\"temperature\":5.0,\"skyText\":\"Rainy as hell\",\"humidity\":0,\"windText\":\" m/s\"}}}\n";
+        activityDTO = JsonService.convertJsonToObject(json, ActivityDTO.class);
+        activityDTO = ActivityService.updateActivity(emf, activityDTO);
+
+        System.out.println("Activity updated in database:");
+        System.out.println(JsonService.convertObjectToJson(activityDTO));
+
+        ActivityDTO activityDTO2 = ActivityService.createActivity(emf, "Skagen", 3.5, 25.0, LocalTime.of(14, 30),
+                LocalDate.now(), "Downhill bonanza", ActivityType.SNOWBOARDING);
+
+        System.out.println("Activity persisted to database:");
+        System.out.println(JsonService.convertObjectToJson(activityDTO2));
     }
 
-    public static String convertObjectToJson(Object object) throws IOException {
-        ObjectMapper mapper = new ObjectMapper();
-        mapper.registerModule(new JavaTimeModule());
-        mapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
-        return mapper.writeValueAsString(object);
-    }
 }
