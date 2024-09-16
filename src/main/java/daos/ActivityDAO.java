@@ -6,6 +6,9 @@ import entities.CityInfo;
 import entities.WeatherInfo;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.TypedQuery;
+
+import java.util.List;
 
 public class ActivityDAO {
 
@@ -92,5 +95,11 @@ public class ActivityDAO {
         }
     }
 
+    public static List<ActivityDTO> getAllActivities() {
+
+        try (EntityManager em = emf.createEntityManager()) {
+            return em.createQuery("SELECT new dtos.ActivityDTO(a) FROM Activity a", ActivityDTO.class).getResultList();
+        }
+    }
 
 }

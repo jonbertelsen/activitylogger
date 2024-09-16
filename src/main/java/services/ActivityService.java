@@ -6,8 +6,6 @@ import dtos.CityInfoDTO;
 import dtos.WeatherInfoDTO;
 import enums.ActivityType;
 import jakarta.persistence.EntityManagerFactory;
-import org.hibernate.jpa.AvailableHints;
-
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalTime;

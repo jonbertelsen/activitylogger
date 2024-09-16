@@ -1,20 +1,15 @@
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
-import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+
 import daos.ActivityDAO;
 import dtos.ActivityDTO;
-import dtos.CityInfoDTO;
-import dtos.WeatherInfoDTO;
 import enums.ActivityType;
 import jakarta.persistence.EntityManagerFactory;
 import config.HibernateConfig;
 import services.ActivityService;
-import services.CityService;
 import services.JsonService;
-import services.WeatherService;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.List;
 
 public class Main {
     public static void main(String[] args) throws IOException, InterruptedException {
@@ -41,6 +36,10 @@ public class Main {
 
         System.out.println("Activity persisted to database:");
         System.out.println(JsonService.convertObjectToJson(activityDTO2));
+
+        System.out.println("All activities in database:");
+        List<ActivityDTO> activities = ActivityDAO.getAllActivities();
+        activities.forEach(activity -> System.out.println(JsonService.convertObjectToJson(activity)));
     }
 
 }
