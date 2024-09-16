@@ -34,6 +34,7 @@ public class ActivityService {
                 .build();
 
         // Persist data to database
+        String json = JsonService.convertObjectToJson(activityDTO);
         return activityDTO = activityDAO.createActivity(activityDTO);
     }
 

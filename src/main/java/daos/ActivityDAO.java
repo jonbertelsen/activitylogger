@@ -95,8 +95,13 @@ public class ActivityDAO {
         }
     }
 
-    public static List<ActivityDTO> getAllActivities() {
+    public static ActivityDTO getActivityById(Long id) {
+        try (EntityManager em = emf.createEntityManager()) {
+            return new ActivityDTO(em.find(Activity.class, id));
+        }
+    }
 
+    public static List<ActivityDTO> getAllActivities() {
         try (EntityManager em = emf.createEntityManager()) {
             return em.createQuery("SELECT new dtos.ActivityDTO(a) FROM Activity a", ActivityDTO.class).getResultList();
         }
