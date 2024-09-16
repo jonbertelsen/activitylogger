@@ -1,5 +1,6 @@
 package persistence;
 
+import entities.*;
 import enums.HibernateConfigState;
 import jakarta.persistence.EntityManagerFactory;
 import lombok.NoArgsConstructor;
@@ -30,7 +31,10 @@ public class HibernateConfig {
 
     private static void getAnnotationConfiguration(Configuration configuration) {
         // add annotated classes --- remember to add new entities here
-        //configuration.addAnnotatedClass(Package.class);
+        configuration.addAnnotatedClass(Activity.class);
+        configuration.addAnnotatedClass(CityInfo.class);
+        configuration.addAnnotatedClass(WeatherInfo.class);
+        configuration.addAnnotatedClass(CurrentData.class);
     }
 
     private static EntityManagerFactory buildEntityFactoryConfig() {
@@ -49,7 +53,7 @@ public class HibernateConfig {
             props.put("hibernate.connection.driver_class", "org.postgresql.Driver"); // driver class for postgresql
             props.put("hibernate.archive.autodetection", "class"); // hibernate scans for annotated classes
             props.put("hibernate.current_session_context_class", "thread"); // hibernate current session context
-            props.put("hibernate.hbm2ddl.auto", "create"); // hibernate creates tables based on entities
+            props.put("hibernate.hbm2ddl.auto", "create-drop"); // hibernate creates tables based on entities
             return getEntityManagerFactory(configuration, props);
         }
         catch (Throwable ex) {

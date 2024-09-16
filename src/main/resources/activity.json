@@ -1,0 +1,28 @@
+{
+  "id": 1,
+  "exerciseDate": "2024-09-16",
+  "exerciseType": "RUNNING",
+  "timeOfDay": "15:45",
+  "duration": 30.0,
+  "distance": 6.5,
+  "comment": "Lovely downhill stroll",
+  "cityInfo": {
+    "id": "12337669-dbab-6b98-e053-d480220a5a3f",
+    "primærtnavn": "Roskilde",
+    "href": "https://api.dataforsyningen.dk/steder/12337669-dbab-6b98-e053-d480220a5a3f",
+    "visueltcenter": [
+      12.08713962,
+      55.63659446
+    ]
+  },
+  "weatherInfo": {
+    "id": 1,
+    "LocationName": "Roskilde",
+    "CurrentData": {
+      "temperature": 18.2,
+      "skyText": "Delvist overskyet",
+      "humidity": 0,
+      "windText": "14.4 m/s"
+    }
+  }
+}

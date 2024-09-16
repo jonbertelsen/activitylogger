@@ -1,10 +1,9 @@
 package dtos;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonSetter;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import entities.CityInfo;
 import lombok.*;
-
-import java.util.List;
 
 @Data
 @ToString
@@ -13,30 +12,20 @@ import java.util.List;
 @Builder
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class CityInfoDTO {
-    @JsonSetter("primærtnavn")
+    @JsonProperty("id")
+    private String id;
+    @JsonProperty("primærtnavn")
     private String name;
-    @JsonSetter("egenskaber")
-    private Properties properties;
-    @JsonSetter("visueltcenter")
-    private List<Double> visualCenter;
-    @JsonSetter("kommuner")
-    private List<Municipality> municipalities;
+    @JsonProperty("href")
+    private String href;
+    @JsonProperty("visueltcenter")
+    private Double[] visualCenter;
 
-    @Data
-    @JsonIgnoreProperties(ignoreUnknown = true)
-    public static class Properties {
-        @JsonSetter("bebyggelseskode")
-        private int buildingCode;
-        @JsonSetter("indbyggerantal")
-        private Integer population;
+    public CityInfoDTO(CityInfo cityInfo){
+        this.id = cityInfo.getId();
+        this.name = cityInfo.getCityName();
+        this.href = cityInfo.getHref();
+        this.visualCenter = new Double[]{cityInfo.getVisualCenterX(), cityInfo.getVisualCenterY()};
     }
 
-    @Data
-    @JsonIgnoreProperties(ignoreUnknown = true)
-    public static class Municipality {
-        @JsonSetter("kode")
-        private int code;
-        @JsonSetter("navn")
-        private String name;
-    }
 }
