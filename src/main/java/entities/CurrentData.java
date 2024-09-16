@@ -1,6 +1,6 @@
 package entities;
 
-import dtos.WeatherInfoDTO;
+import dtos.CurrentDataDTO;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -22,7 +22,7 @@ public class CurrentData {
     @ToString.Exclude
     private WeatherInfo weatherInfo;
 
-    public CurrentData(WeatherInfoDTO.CurrentDataDTO currentData) {
+    public CurrentData(CurrentDataDTO currentData) {
         this.temperature = currentData.getTemperature();
         this.skyText = currentData.getSkyText();
         this.humidity = currentData.getHumidity();
