@@ -6,16 +6,14 @@ import dtos.CityInfoDTO;
 import dtos.WeatherInfoDTO;
 import enums.ActivityType;
 import jakarta.persistence.EntityManagerFactory;
+
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
 public class ActivityService {
 
-    public static ActivityDTO createActivity(EntityManagerFactory emf, String cityName,
-                                 double distance, double duration, LocalTime timeOfDay,
-                                  LocalDate exerciseDate, String comment,
-                                 ActivityType activityType) throws IOException, InterruptedException {
+    public static ActivityDTO createActivity(String cityName, double distance, double duration, LocalTime timeOfDay, LocalDate exerciseDate, String comment, ActivityType activityType, EntityManagerFactory emf) throws IOException, InterruptedException {
 
         ActivityDAO activityDAO = ActivityDAO.getInstance(emf);
         WeatherInfoDTO weatherInfo = WeatherService.fetchWeatherDataByLocationName(cityName);

@@ -17,8 +17,8 @@ public class Main {
         EntityManagerFactory emf = HibernateConfig.getEntityManagerFactory("activitylogger");
 
         // Fetch data from external APIs
-        ActivityDTO activityDTO = ActivityService.createActivity(emf, "Roskilde", 5.5, 35.0, LocalTime.of(12, 30),
-                LocalDate.now(), "Nice walk in the park", ActivityType.WALKING);
+        ActivityDTO activityDTO = ActivityService.createActivity("Roskilde", 5.5, 35.0, LocalTime.of(12, 30),
+                LocalDate.now(), "Nice walk in the park", ActivityType.WALKING, emf);
 
         System.out.println("Activity persisted to database:");
         System.out.println(JsonService.convertObjectToJson(activityDTO));
@@ -31,8 +31,8 @@ public class Main {
         System.out.println("Activity updated in database:");
         System.out.println(JsonService.convertObjectToJson(activityDTO));
 
-        ActivityDTO activityDTO2 = ActivityService.createActivity(emf, "Skagen", 3.5, 25.0, LocalTime.of(14, 30),
-                LocalDate.now(), "Downhill bonanza", ActivityType.SNOWBOARDING);
+        ActivityDTO activityDTO2 = ActivityService.createActivity("Skagen", 3.5, 25.0, LocalTime.of(14, 30),
+                LocalDate.now(), "Downhill bonanza", ActivityType.SNOWBOARDING, emf);
 
         System.out.println("Activity persisted to database:");
         System.out.println(JsonService.convertObjectToJson(activityDTO2));
