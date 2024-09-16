@@ -1,5 +1,5 @@
 package enums;
 
-public enum Activity {
+public enum ActivityType {
     RUNNING, WALKING, CYCLING, HIKING, SWIMMING, SKATING, SKIING, SNOWBOARDING, SNOWSHOEING, OTHER
 }

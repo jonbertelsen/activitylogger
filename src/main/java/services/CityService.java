@@ -52,8 +52,6 @@ public class CityService {
             }
         }
         catch (Exception e) {
-            https:
-            //api.dataforsyningen.dk/steder?prim%C3%A6rtnavn=Roskilde
             e.printStackTrace();
         }
         return null;

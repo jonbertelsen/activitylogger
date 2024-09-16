@@ -1,7 +1,7 @@
 import dtos.ActivityDTO;
 import dtos.CityInfoDTO;
 import dtos.WeatherInfoDTO;
-import enums.Activity;
+import enums.ActivityType;
 import services.CityService;
 import services.WeatherService;
 
@@ -11,12 +11,13 @@ import java.time.LocalTime;
 
 public class Main {
     public static void main(String[] args) throws IOException, InterruptedException {
+
         WeatherInfoDTO weatherInfo = WeatherService.fetchWeatherDataByLocationName("Roskilde");
         CityInfoDTO cityInfo = CityService.getCityInfo("Roskilde");
 
         ActivityDTO activityDTO = ActivityDTO
                 .builder()
-                .exerciseType(Activity.RUNNING)
+                .exerciseType(ActivityType.RUNNING)
                 .cityInfo(cityInfo)
                 .distance(6.5)
                 .exerciseDate(LocalDate.now())
@@ -28,9 +29,6 @@ public class Main {
                 .build();
 
         System.out.println(activityDTO);
-
-        System.out.println(activityDTO.getCityInfo().getVisualCenter());
-
 
     }
 }

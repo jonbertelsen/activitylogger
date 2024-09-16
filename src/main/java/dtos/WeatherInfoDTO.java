@@ -1,5 +1,6 @@
 package dtos;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSetter;
 import lombok.*;
 
@@ -8,21 +9,10 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 public class WeatherInfoDTO {
-    @JsonSetter("LocationName")
+    @JsonProperty("LocationName")
     private String locationName;
-    @JsonSetter("CurrentData")
-    private CurrentData currentData;
-
-    @Data
-    @ToString
-    @AllArgsConstructor
-    @NoArgsConstructor
-    private class CurrentData {
-        private double temperature;  // In Celsius or Fahrenheit
-        private String skyText;      // Description of sky condition (e.g., clear, cloudy)
-        private int humidity;        // Humidity percentage
-        private String windText;     // Description of wind condition
-    }
+    @JsonProperty("CurrentData")
+    private CurrentDataDTO currentData;
 }
 
 

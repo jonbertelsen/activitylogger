@@ -1,6 +1,6 @@
 package dtos;
 
-import enums.Activity;
+import enums.ActivityType;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -15,7 +15,7 @@ import java.time.LocalTime;
 @Builder
 public class ActivityDTO {
     private LocalDate exerciseDate;
-    private Activity exerciseType;
+    private ActivityType exerciseType;
     private LocalTime timeOfDay;
     private double duration;  // In hours, for example
     private double distance;  // In kilometers or miles
