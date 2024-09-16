@@ -2,10 +2,7 @@ package entities;
 
 import dtos.WeatherInfoDTO;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Data
 @Entity
@@ -22,6 +19,7 @@ public class CurrentData {
     private int humidity;
     private String windText;
     @OneToOne(mappedBy = "currentData")
+    @ToString.Exclude
     private WeatherInfo weatherInfo;
 
     public CurrentData(WeatherInfoDTO.CurrentDataDTO currentData) {

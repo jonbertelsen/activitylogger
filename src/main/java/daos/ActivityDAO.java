@@ -2,8 +2,11 @@ package daos;
 
 import dtos.ActivityDTO;
 import entities.Activity;
+import entities.CityInfo;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
+
+import java.util.Optional;
 
 public class ActivityDAO {
 
@@ -25,8 +28,16 @@ public class ActivityDAO {
 
         Activity activity = new Activity(activityDTO);
         try (EntityManager em = emf.createEntityManager()) {
+
             em.getTransaction().begin();
-            em.persist(activity);
+
+                CityInfo cityInfo = em.find(CityInfo.class, activityDTO.getCityInfo().getId());
+                if (cityInfo != null) {
+                    activity.setCityInfo(cityInfo);
+                } else {
+                    em.persist(activity.getCityInfo());
+                }
+                em.persist(activity);
             em.getTransaction().commit();
         }
         return new ActivityDTO(activity);

@@ -6,9 +6,8 @@ import dtos.ActivityDTO;
 import dtos.CityInfoDTO;
 import dtos.WeatherInfoDTO;
 import enums.ActivityType;
-import enums.HibernateConfigState;
 import jakarta.persistence.EntityManagerFactory;
-import persistence.HibernateConfig;
+import config.HibernateConfig;
 import services.CityService;
 import services.WeatherService;
 import java.io.IOException;
@@ -18,7 +17,7 @@ import java.time.LocalTime;
 public class Main {
     public static void main(String[] args) throws IOException, InterruptedException {
 
-        EntityManagerFactory emf = HibernateConfig.getEntityManagerFactoryConfig(HibernateConfigState.NORMAL, "activitylogger");
+        EntityManagerFactory emf = HibernateConfig.getEntityManagerFactory("activitylogger");
 
         WeatherInfoDTO weatherInfo = WeatherService.fetchWeatherDataByLocationName("Roskilde");
         CityInfoDTO cityInfo = CityService.getCityInfo("Roskilde");
@@ -46,7 +45,5 @@ public class Main {
         // Serialize LocalDateTime to JSON
         String json = objectMapper.writeValueAsString(activityDTO);
         System.out.println(json);
-
-
     }
 }

@@ -17,6 +17,7 @@ public class WeatherInfo {
     private String locationName;
     @OneToOne(cascade = CascadeType.PERSIST)
     private CurrentData currentData;
+    @ToString.Exclude
     @OneToOne(mappedBy = "weatherInfo")
     private Activity activity;
 

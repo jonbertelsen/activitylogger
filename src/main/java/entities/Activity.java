@@ -29,8 +29,8 @@ public class Activity {
     @OneToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "weather_info_id", unique = true)
     private WeatherInfo weatherInfo;
-    @OneToOne(cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "city_info_id", unique = true)
+    @ManyToOne
+    @JoinColumn(name = "city_info_id")
     private CityInfo cityInfo;
 
     public Activity(ActivityDTO activityDTO) {

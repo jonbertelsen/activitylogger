@@ -7,6 +7,9 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
+
+import java.util.List;
 
 @Entity
 @Data
@@ -21,8 +24,8 @@ public class CityInfo {
     private double visualCenterX;
     private double visualCenterY;
 
-    @OneToOne(mappedBy = "cityInfo")
-    private Activity activity;
+    @OneToMany(mappedBy = "cityInfo")
+    private List<Activity> activities;
 
     public CityInfo(CityInfoDTO cityInfo) {
         this.id = cityInfo.getId();
