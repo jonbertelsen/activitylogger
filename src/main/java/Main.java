@@ -24,6 +24,7 @@ public class Main {
         WeatherInfoDTO weatherInfo = WeatherService.fetchWeatherDataByLocationName("Roskilde");
         CityInfoDTO cityInfo = CityService.getCityInfo("Roskilde");
 
+        // Normally you would get this data from a form on a website or similar
         ActivityDTO activityDTO = ActivityDTO
                 .builder()
                 .exerciseType(ActivityType.RUNNING)
@@ -37,11 +38,11 @@ public class Main {
                 .weatherInfo(weatherInfo)
                 .build();
 
+        // Persist data to database
         ActivityDAO activityDAO = ActivityDAO.getInstance(emf);
         activityDTO = activityDAO.createActivity(activityDTO);
 
         // Map aggregated data back to JSON
-
         ObjectMapper objectMapper = new ObjectMapper();
 
         // Serialize LocalDateTime to JSON
