@@ -8,11 +8,11 @@ This is a rough solution to the exercise part 2:
 
 ### DTOs
 
-![DTOs](./docs/dtos.png)
+![DTOs](./docs/DTOs.png)
 
 ### Entities
 
-![Entities](./docs/entities.png)
+![Entities](./docs/Entities.png)
 
 ## ERD
 

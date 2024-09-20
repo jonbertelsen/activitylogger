@@ -26,6 +26,7 @@ public class Activity {
     private double distance;  // In kilometers or miles
     private String comment;
 
+
     @OneToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
     @JoinColumn(name = "weather_info_id", unique = true)
     private WeatherInfo weatherInfo;

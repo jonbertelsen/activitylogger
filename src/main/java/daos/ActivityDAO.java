@@ -6,7 +6,6 @@ import entities.CityInfo;
 import entities.WeatherInfo;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
-import jakarta.persistence.TypedQuery;
 
 import java.util.List;
 
@@ -28,6 +27,7 @@ public class ActivityDAO {
 
     public ActivityDTO createActivity(ActivityDTO activityDTO) {
         Activity activity = new Activity(activityDTO);
+
         try (EntityManager em = emf.createEntityManager()) {
             em.getTransaction().begin();
                 CityInfo cityInfo = em.find(CityInfo.class, activityDTO.getCityInfo().getId());
